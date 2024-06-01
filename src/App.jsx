@@ -1,5 +1,6 @@
-import { Typography, TextField, Box, Button } from "@mui/material";
-import LogInForm from "./components/LogInForm/";
+import { Box } from "@mui/material";
+import { LogInForm, RegisterForm } from "./components";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
@@ -12,7 +13,12 @@ const App = () => {
         alignItems: "center",
         bgcolor: "lightblue",
       }}
-    ></Box>
+    >
+      <Routes>
+        <Route path="/login" element={<LogInForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+      </Routes>
+    </Box>
   );
 };
 

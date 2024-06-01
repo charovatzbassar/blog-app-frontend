@@ -2,14 +2,20 @@ import { Typography, TextField, Box, Button } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const LogInForm = () => {
+const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    email: "",
   });
 
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        localStorage.setItem("user", JSON.stringify(formData));
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -21,7 +27,7 @@ const LogInForm = () => {
         }}
       >
         <Typography sx={{ marginY: "1rem", fontSize: "1.5rem" }}>
-          Log in to BlogApp
+          Register to BlogApp
         </Typography>
         <TextField
           label="Username"
@@ -31,6 +37,18 @@ const LogInForm = () => {
           onChange={(event) =>
             setFormData((prev) => {
               return { ...prev, username: event.target.value };
+            })
+          }
+        ></TextField>
+        <TextField
+          label="Email"
+          name="email"
+          type="email"
+          sx={{ marginY: "1rem" }}
+          value={formData.email}
+          onChange={(event) =>
+            setFormData((prev) => {
+              return { ...prev, email: event.target.value };
             })
           }
         ></TextField>
@@ -45,15 +63,20 @@ const LogInForm = () => {
             })
           }
         ></TextField>
-        <Button variant="contained" color="primary" sx={{ marginY: "1rem" }}>
-          Log In
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{ marginY: "1rem" }}
+        >
+          Register
         </Button>
-        <Link to="/register">
-          <Button>Not a user?</Button>
+        <Link to="/login">
+          <Button>Already a user?</Button>
         </Link>
       </Box>
     </form>
   );
 };
 
-export default LogInForm;
+export default RegisterForm;
